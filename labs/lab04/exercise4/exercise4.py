@@ -1,7 +1,16 @@
 
 def analyze_performance(lap_times):
-  
-    pass
+    n = len(lap_times)
+    
+    split = (n + 1) // 2  
+    
+    first_half = lap_times[:split]
+    second_half = lap_times[split:]
+    
+    first_avg = sum(first_half) / len(first_half)
+    second_avg = sum(second_half) / len(second_half)
+    
+    return second_avg > first_avg
 
 
 # Test
