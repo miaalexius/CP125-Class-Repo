@@ -2,29 +2,40 @@
 # Write your code below:
 
 def calculate_order_total(products_file, order_file, output_file):
-    '''products = {}
+    f_product = open(products_file, "r")
+    f_order = open(order_file, "r")
+    f_out = open(output_file, "w")
 
-    with open(products_file, "r") as f:
-        for line in f:
-            name, price = line.strip().split(",")
-            products[name] = float(price)
+    f_product.readline() 
+    prices = {}
+    for line in f_product:
+        parts = line.strip().split(",")
+        if len(parts) >= 3:
+            prod_id = parts[0]
+            price = float(parts[2])
+            prices[prod_id] = price
+
+    f_order.readline() 
+    f_out.write("product_id,total_cost\n") 
     
-    total = 0.0
+    grand_total = 0.0
     
-    with open(order_file, "r") as f:
-        for line in f:
-            product_name, quantity = line.strip().split(",")
-            quantity = int(quantity)
+    for line in f_order:
+        parts = line.strip().split(",")
+        if len(parts) == 2:
+            prod_id = parts[0]
+            quantity = int(parts[1])
             
-            if product_name in products:
-                total += products[product_name] * quantity
-    
-    with open(output_file, "w") as f:
-        f.write(f"Grand Total: ${total:.2f}\n")
-    
-    return total'''
+            if prod_id in prices:
+                item_total = prices[prod_id] * quantity
+                grand_total += item_total
+                
+                f_out.write(f"{prod_id},{item_total:.2f}\n")
 
-    
+    f_product.close()
+    f_order.close()
+    f_out.close()
 
+    return grand_total
 
 result = calculate_order_total("labs/lab08/exercise3/data/products.csv", "labs/lab08/exercise3/data/order.csv", "labs/lab08/exercise3/data/total.csv")
