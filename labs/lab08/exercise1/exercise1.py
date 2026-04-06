@@ -2,25 +2,20 @@
 # Write your code below:
 
 def filter_passing_scores(input_file, output_file):
-    f = open(input_file, "r")
-    f2 = open(output_file, "w")
-    
-    passing_count = 0
-    lines = f.readlines()
+    """
+    Filter students with passing scores (>= 80) and write to output file.
 
-    for line in lines:
-        parts = line.strip().split()
-        
-        score = float(parts[1])
-            
-        if score >= 80:
-            f2.write(line)
-            passing_count += 1
-    
-    f.close()
-    f2.close()
+    Args:
+        input_file: path to input file (student_id score per line)
+        output_file: path to output file
 
-    return passing_count
+    Returns:
+        int: count of passing students
+    """
+    # TODO: Implement this function
+    pass
 
-result = filter_passing_scores("labs/lab08/exercise1/data/scores.txt", "labs/lab08/exercise1/data/passing.txt")
+
+# Test your code here
+result = filter_passing_scores("data/scores.txt", "data/passing.txt")
 print(f"Passing students: {result}")
